@@ -82,9 +82,12 @@ for i in Model.asignaciones:
 
 #Calificación mínima deseada
 
+# Calcular el promedio de la nota y obtener su valor numérico
+promedio_nota = sum(Model.x[i] * Model.P[i, 'Porcentaje'] for i in Model.asignaciones)
 
+# Mostrar el valor numérico del promedio de la nota utilizando display
+print("Promedio de la nota:", promedio_nota)
 
 # Aplicación del solver
 SolverFactory('ipopt').solve(Model)
-#SolverFactory('nsga2').solve(Model)
 Model.display()
