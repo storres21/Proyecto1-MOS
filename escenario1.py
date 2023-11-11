@@ -13,12 +13,13 @@ Model = ConcreteModel()
 Model.asignaciones = {'Taller1', 'Taller2', 'Parcial1', 'Parcial2', 'Proyecto'}
 Model.caracteristicas = {'Dificultad', 'Tiempo', 'Porcentaje'}
 Model.nAsignaciones = 5
-Model.tiempoDisponible = 15
+Model.tiempoDisponible = 40
+
 
 # Asignación de pesos a las funciones objetivo
-peso_porcentaje = 0.2
-peso_tiempo = 0.8
-peso_dificultad = 0.2
+peso_porcentaje = 0.33
+peso_tiempo = 0.33
+peso_dificultad = 0.34
 
 Model.P = Param(Model.asignaciones, Model.caracteristicas, initialize=0, mutable=True)
 
@@ -72,21 +73,9 @@ for i in Model.asignaciones:
         if i != j:
            Model.res2.add(abs(Model.x[i] - Model.x[j]) >= 1 )
 
+# Restricción de tiempo total
+Model.res3 = Constraint(expr=sum(Model.x[i] * Model.T[i, 'Tiempo'] for i in Model.asignaciones) <= Model.tiempoDisponible)
 
-#Restricción de límite de tareas, a x tareas les tengo que poner una prioridad de 0
-# Model.res3 = Constraint()
-
-
-#Restricción del tiempo disponible
-# Model.res4 = Constraint(expr=sum(Model.x[i]*Model.T[i,'Tiempo'] for i in Model.asignaciones) <= Model.tiempoDisponible)
-
-#Calificación mínima deseada
-
-# Calcular el promedio de la nota y obtener su valor numérico
-promedio_nota = sum(Model.x[i] * Model.P[i, 'Porcentaje'] for i in Model.asignaciones)
-
-# Mostrar el valor numérico del promedio de la nota utilizando display
-print("Promedio de la nota:", promedio_nota)
 
 # Aplicación del solver
 SolverFactory('ipopt').solve(Model)
