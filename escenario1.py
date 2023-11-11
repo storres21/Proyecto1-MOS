@@ -16,11 +16,6 @@ Model.nAsignaciones = 5
 Model.tiempoDisponible = 40
 
 
-# Asignación de pesos a las funciones objetivo
-peso_porcentaje = 0.33
-peso_tiempo = 0.33
-peso_dificultad = 0.34
-
 Model.P = Param(Model.asignaciones, Model.caracteristicas, initialize=0, mutable=True)
 
 Model.P['Taller1', 'Porcentaje'] = 0.1
@@ -58,7 +53,7 @@ Model.obj2 = sum(Model.x[i]*-(Model.T[i,'Tiempo']) for i in Model.asignaciones)
 Model.obj3 = sum(Model.x[i]*-(Model.E[i,'Dificultad']) for i in Model.asignaciones)
 
 #Funcion  objetivo
-Model.Obj = Objective(expr= peso_porcentaje*Model.obj1 + peso_tiempo*Model.obj2 + peso_dificultad*Model.obj3, sense=maximize)
+Model.Obj = Objective(expr= Model.obj1 + Model.obj2 + Model.obj3, sense=maximize)
 
 
 #Siempre debo tener cuenta todas las asignaciones
