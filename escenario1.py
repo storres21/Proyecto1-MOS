@@ -26,19 +26,19 @@ Model.P['Proyecto', 'Porcentaje'] = 0.25
 
 Model.T = Param(Model.asignaciones, Model.caracteristicas, initialize=999, mutable=True)
 
-Model.T['Taller1', 'Tiempo'] = 1
-Model.T['Taller2', 'Tiempo'] = 3
-Model.T['Parcial1', 'Tiempo'] = 6
-Model.T['Parcial2', 'Tiempo'] = 4
-Model.T['Proyecto', 'Tiempo'] = 8
+Model.T['Taller1', 'Tiempo'] = 10
+Model.T['Taller2', 'Tiempo'] = 8
+Model.T['Parcial1', 'Tiempo'] = 1
+Model.T['Parcial2', 'Tiempo'] = 2
+Model.T['Proyecto', 'Tiempo'] = 6
 
 Model.E = Param(Model.asignaciones, Model.caracteristicas, initialize=999, mutable=True)
 
-Model.E['Taller1', 'Dificultad'] = 1
-Model.E['Taller2', 'Dificultad'] = 5
-Model.E['Parcial1', 'Dificultad'] = 7
-Model.E['Parcial2', 'Dificultad'] = 10
-Model.E['Proyecto', 'Dificultad'] = 8
+Model.E['Taller1', 'Dificultad'] = 5
+Model.E['Taller2', 'Dificultad'] = 9
+Model.E['Parcial1', 'Dificultad'] = 4
+Model.E['Parcial2', 'Dificultad'] = 5
+Model.E['Proyecto', 'Dificultad'] = 6
 
 #Variables de decision
 # Me dice que prioridad le debo dar a esa asignacion
